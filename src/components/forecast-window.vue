@@ -2,7 +2,7 @@
   <div class="window container text-dark">
     <h2>{{ weatherData.city.name }}</h2>
     <div class="row justify-content-center">
-      <div class="col-6 col-md-5">
+      <div class="col-6 col-md-5 align-self-center">
         <p class="weather-icon mb-1">
           <i class="wi wi-day-sunny"
           :class="'wi-' + weatherDesc(weatherData.list[0].weather[0].description)"></i>
@@ -13,7 +13,7 @@
           {{ weatherData.list[0].main.temp_max | degreeFilter }}
         </p>
       </div>
-      <div class="align-self-center col-6 col-md-5">
+      <div class="col-6 col-md-5 align-self-center">
         <p class="temp">
           {{ weatherData.list[0].main.temp | degreeFilter }}
         </p>
@@ -25,7 +25,7 @@
             <i class="wi wi-humidity"></i>
             <span>{{ ` ${weatherData.list[0].main.humidity} %` }}</span>
           </div>
-          <div class="col-6 col-md-5">
+          <div class="col-6">
             <i class="wi wi-wind wi-from-e" :class="'wi-towards-' + windDirection(weatherData.list[0].wind.deg)"></i>
             <span>{{ ` ${weatherData.list[0].wind.speed} m/s` }}</span>
           </div>

@@ -79,12 +79,15 @@ export default {
 .transition {
   transition: all 1s;
 }
+.hide {
+  opacity: 0
+}
 .background {
   height: 100vh;
   @include bg-cover;
 }
-.hide {
-  opacity: 0
+.btn {
+  font-weight: 600;
 }
 .hint {
   position: relative;
