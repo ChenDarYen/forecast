@@ -1,0 +1,19 @@
+$mb: 576px;
+$pad: 768px;
+$dt: 992px;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: $mb,
+  md: $pad,
+  lg: $dt,
+) !default;
+
+$container-max-widths: (
+  sm: 100%,
+  md: 100%,
+  lg: $dt,
+) !default;
+
+$grid-columns:                12 !default;
+$grid-gutter-width:           20px !default;
