@@ -31,7 +31,7 @@ export default {
       isFail: false,
       showWeather: false,
       city: '',
-      backgroundImg: '../../static/img/background.jpg',
+      backgroundImg: '../static/img/background.jpg',
       weatherData: {}
     }
   },
