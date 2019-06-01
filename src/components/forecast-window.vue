@@ -1,10 +1,10 @@
 <template>
   <div class="window container text-dark">
     <h2>{{ weatherData.city.name }}</h2>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-5">
       <div class="col-6 col-md-5 align-self-center">
         <p class="weather-icon mb-1">
-          <i class="wi wi-day-sunny"
+          <i class="wi"
           :class="'wi-' + weatherDesc(weatherData.list[0].weather[0].description)"></i>
         </p>
         <p class="temp-range">
@@ -32,6 +32,20 @@
         </div>
       </div>
     </div>
+    <hr>
+    <h5 class="mt-4 mb-3">逐三小時預測</h5>
+    <div class="threeH row">
+      <div class="col-2" v-for="weather in weatherData.list" :key="weather.dt">
+        <i class="wi mb-2"
+          :class="'wi-' + weatherDesc(weather.weather[0].description)"></i>
+        <p>
+          {{ weather.main.temp | degreeFilter }}
+        </p>
+        <p class="time">
+          {{weather.dt | timeFilter }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,12 +67,12 @@ export default {
         return 'cloudy'
       } else if (desc === 'light rain') {
         return 'showers'
-      } else if (desc === 'light snow') {
+      } else if (desc.indexOf('snow') >= 0) {
         return 'snow'
       } else if (desc === 'few clouds') {
         return 'day-cloudy'
-      } else if (desc === '') {
-        return ''
+      } else if (desc === 'moderate rain' || desc === 'heavy intensity rain') {
+        return 'rain'
       } else if (desc === '') {
         return ''
       }
@@ -130,6 +144,18 @@ p {
 }
 .info>div {
   padding: 0 !important;
+}
+hr {
+  width: 100%;
+  border-top: 2px solid rgba($dark, .5);
+}
+.threeH {
+  i {
+    font-size: 1.75rem;
+  }
+  .time {
+    font-size: .75rem;
+  }
 }
 @include md {
   .window {

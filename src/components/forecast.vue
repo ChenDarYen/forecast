@@ -1,23 +1,22 @@
 <template>
-  <div class="background" :style="{'background-image': 'url(' + backgroundImg + ')'}">
-    <div class="container text-center text-light">
-      <h1 class="display-4 pt-5">天氣預報</h1>
-      <div class="form-group mt-4 mb-1">
-        <label for="city">請輸入愈查詢的<strong>城市名稱</strong></label>
-        <input neme="cuty" id="city" type="text" class="form-control col-10 col-md-6 mx-auto" placeholder="London, New York, Paris..."
-        v-model="city" @keyup.enter="search">
-        <button type="submit" id="submitCity" class="btn btn-light mt-3"
-        @click="search">查  詢</button>
-      </div>
-      <div class="hint">
-        <p class="transition text-danger"
-        :class="{'hide': !isNoCity}">請輸入城市名稱</p>
-        <p class="transition text-danger"
-        :class="{'hide': !isFail}">沒有您所查詢城市的資料</p>
-      </div>
-      <Window class="transition col-12 col-md-8"
-      :class="{'hide': !showWeather}" :weatherData="weatherData"/>
+  <div class="container text-center text-light">
+    <div class="background" :style="{'background-image': 'url(' + backgroundImg + ')'}"></div>
+    <h1 class="display-4 pt-5">天氣預報</h1>
+    <div class="form-group mt-4 mb-1">
+      <label for="city">請輸入愈查詢的<strong>城市名稱</strong></label>
+      <input neme="cuty" id="city" type="text" class="form-control col-10 col-md-6 mx-auto" placeholder="London, New York, Paris..."
+      v-model="city" @keyup.enter="search">
+      <button type="submit" id="submitCity" class="btn btn-light mt-3"
+      @click="search">查  詢</button>
     </div>
+    <div class="hint">
+      <p class="transition text-danger"
+      :class="{'hide': !isNoCity}">請輸入城市名稱</p>
+      <p class="transition text-danger"
+      :class="{'hide': !isFail}">沒有您所查詢城市的資料</p>
+    </div>
+    <Window class="transition col-12 col-md-8 mb-5"
+    :class="{'hide': !showWeather}" :weatherData="weatherData"/>
   </div>
 </template>
 
@@ -82,7 +81,13 @@ export default {
 .hide {
   opacity: 0
 }
+
 .background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -5;
+  width: 100%;
   height: 100vh;
   @include bg-cover;
 }

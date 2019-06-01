@@ -8,10 +8,12 @@ import VueAxios from 'vue-axios'
 import App from './App'
 
 import DegreeFilter from './components/filters/degree'
+import TimeFilter from './components/filters/timestamp'
 
 Vue.use(VueAxios, axios)
 
 Vue.filter('degreeFilter', DegreeFilter)
+Vue.filter('timeFilter', TimeFilter)
 
 Vue.config.productionTip = false
 
