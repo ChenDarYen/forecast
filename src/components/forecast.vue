@@ -37,7 +37,7 @@ export default {
   methods: {
     getWeather (city) {
       const vm = this
-      const api = `${process.env.APIPATH}&q=${city}`
+      const api = `${process.env.WEATHERAPIPATH}&q=${city}`
       this.$http.get(api).then(response => {
         vm.weatherData = response.data
         vm.showWeather = true
