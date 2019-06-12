@@ -149,7 +149,7 @@ export default {
         },
         options: {
           legend: {
-            display: false,
+            display: false
           }
         }
       })
