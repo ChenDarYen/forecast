@@ -34,15 +34,13 @@
     </div>
     <hr>
     <h5 class="mt-4 mb-3">逐三小時預測</h5>
-    <div class="threeH row">
+    <canvas id="threeHChart"></canvas>
+    <div class="three-h row">
       <div class="col-2" v-for="forecast in forecastData.list" :key="forecast.dt">
         <i class="wi mb-2"
           :class="'wi-' + weatherDesc(forecast.weather[0].description)"></i>
         <p>
           {{ forecast.main.temp | degreeFilter }}
-        </p>
-        <p class="time">
-          {{forecast.dt | timeFilter }}
         </p>
       </div>
     </div>
@@ -50,6 +48,8 @@
 </template>
 
 <script>
+import Chart from 'chart.js'
+
 export default {
   props: {
     weatherData: {
@@ -63,11 +63,11 @@ export default {
   },
   methods: {
     getForecast () {
-      console.log(1)
       const vm = this
       const api = `${process.env.FORECASTAPIPATH}&q=${this.weatherData.name}`
       this.$http.get(api).then(response => {
         vm.forecastData = response.data
+        vm.drawChart()
       })
     },
     weatherDesc (description) {
@@ -124,6 +124,35 @@ export default {
       } else {
         return 'nnw'
       }
+    },
+    drawChart () {
+      const ctx = document.getElementById('threeHChart')
+      const labelData = this.forecastData.list.map(item => {
+        const date = new Date(item.dt * 1000)
+        const h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours())
+        const m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+        return `${h}:${m}`
+      })
+      const chartData = this.forecastData.list.map(item => {
+        return (item.main.temp - 273.15).toFixed(1)
+      })
+      var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labelData,
+          datasets: [{
+            borderColor: '#343a40',
+            borderWidth: 1.5,
+            data: chartData,
+            fill: false
+          }]
+        },
+        options: {
+          legend: {
+            display: false,
+          }
+        }
+      })
     }
   },
   watch: {
@@ -167,7 +196,7 @@ hr {
   width: 100%;
   border-top: 2px solid rgba($dark, .5);
 }
-.threeH {
+.three-h {
   i {
     font-size: 1.75rem;
   }
